@@ -1,0 +1,37 @@
+dubbo:
+  application:
+    name: common-gateway
+    owner: dylan
+  registry:
+    address: zookeeper://39.107.34.150:2181
+    check: true
+    group: dubbo-dev
+    simplified: true
+  metadata-report:
+    address: zookeeper://39.107.34.150:2181
+    retry-times: 30
+    cycle-report: false
+    group: dubbo-dev
+  scan:
+    base-packages: com.dylan.commongateway
+
+captchaFlag : false
+
+spring:
+  thymeleaf:
+    suffix: .html
+    cache: false
+    prefix: classpath:/templates/
+
+
+  datasource:
+    url: jdbc:mysql://39.107.34.150:3306/mymart?useUnicode=true&characterEncoding=utf8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8060
+
+
+

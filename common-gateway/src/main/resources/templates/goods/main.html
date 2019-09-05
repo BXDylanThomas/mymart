@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:include="common/head :: header('主页面')" />
+
+</head>
+<body>
+<div th:replace="common/topfooter :: navbar"></div>
+<a href="/user/login" style="position: relative;left: 500px;top: 100px;">登录</a>
+<th:block th:include="common/head :: footer" />
+
+
+</body>
+</html>
