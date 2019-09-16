@@ -1,8 +1,10 @@
 package com.dylan.userprovidersss.dal.dao;
 
+import com.dylan.Result.AbstractRequest;
 import com.dylan.constants.SqlMethodConstants;
 import com.dylan.dto.LoginRequest;
 import com.dylan.dto.RegisterRequest;
+import com.dylan.dto.UserUpdateRequest;
 import com.dylan.userprovidersss.dal.daoprovider.UserSqlProvider;
 import com.dylan.userprovidersss.dal.model.User;
 import org.apache.ibatis.annotations.*;
@@ -16,13 +18,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserDao {
-    Class clazz = UserSqlProvider.class;
 
-    @InsertProvider(type = clazz,method = SqlMethodConstants.INSERTTABLE )
-    Integer insert(RegisterRequest registerRequest);
+    @InsertProvider(type = UserSqlProvider.class,method = SqlMethodConstants.INSERTTABLE )
+    Integer insert(AbstractRequest abstractRequest);
 
-    @SelectProvider(type = clazz,method = SqlMethodConstants.SELECTTABLE)
-    User login(LoginRequest loginRequest);
+    @SelectProvider(type = UserSqlProvider.class,method = SqlMethodConstants.SELECTTABLE)
+    User select(AbstractRequest abstractRequest);
+
+    @UpdateProvider(type = UserSqlProvider.class,method = SqlMethodConstants.UPDATETABLE)
+    Integer update(AbstractRequest abstractRequest);
 
     @Select("select * from user where username=#{userName}")
     User isExistsUserName(String userName);

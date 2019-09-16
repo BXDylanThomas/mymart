@@ -15,6 +15,8 @@ public enum UserCodeConstants {
 
     REQUEST_DATA_FAILUE("000360", "请求参数校验失败"),
     SYSTEM_ERROR("000361", "系统错误"),
+    USER_UPDATE_ERROR("000601","用户修改失败"),
+    USER_PASSWORD_ERROR("000602","原始密码错误"),
     ;
 
     private String code;

@@ -1,5 +1,6 @@
 package com.dylan.userprovidersss.dal.model;
 
+import com.dylan.sqlprovider.MyId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Data
 public class Address implements Serializable {
 
+    @MyId
     private Integer addressId;
     private Integer userId;
     private String userName;

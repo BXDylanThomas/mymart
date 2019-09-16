@@ -1,6 +1,12 @@
 package com.dylan.userprovidersss.dal.dao;
 
+import com.dylan.Result.AbstractRequest;
 import com.dylan.constants.SqlMethodConstants;
+import com.dylan.dto.AddressAddRequest;
+import com.dylan.dto.AddressDeleteRequest;
+import com.dylan.dto.AddressQueryRequest;
+import com.dylan.dto.AddressUpdateRequest;
+import com.dylan.userprovidersss.dal.daoprovider.AddressSqlProvider;
 import com.dylan.userprovidersss.dal.model.Address;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,18 +18,17 @@ import java.util.List;
 
 @Repository
 public interface AddressDao {
-    Class clazz = Address.class;
 
-    @InsertProvider(type = clazz,method = SqlMethodConstants.INSERTTABLE)
-    Integer addressAdd(Address address);
+    @InsertProvider(type = AddressSqlProvider.class,method = SqlMethodConstants.INSERTTABLE)
+    Integer addressAdd(AbstractRequest abstractRequest);
 
-    @DeleteProvider(type = clazz,method = SqlMethodConstants.DELETETABLE)
-    Integer addressDeleteByAddressId(String addressId);
+    @DeleteProvider(type = AddressSqlProvider.class,method = SqlMethodConstants.DELETETABLE)
+    Integer addressDelete(AbstractRequest abstractRequest);
 
-    @UpdateProvider(type = clazz,method = SqlMethodConstants.UPDATETABLE)
-    Integer addressUpdate(Address address);
+    @UpdateProvider(type = AddressSqlProvider.class,method = SqlMethodConstants.UPDATETABLE)
+    Integer addressUpdate(AbstractRequest abstractRequest);
 
-    @SelectProvider(type = clazz,method = SqlMethodConstants.SELECTTABLE)
-    List<Address> addressQueryByUserId(String userId);
+    @SelectProvider(type = AddressSqlProvider.class,method = SqlMethodConstants.SELECTTABLE)
+    List<Address> addressQuery(AbstractRequest abstractRequest);
 
 }

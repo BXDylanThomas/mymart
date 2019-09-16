@@ -10,8 +10,7 @@ import lombok.Data;
  * @Date :create in 2019/9/4 15:00
  */
 @Data
-public class AddressUpdateResponse extends AbstractResponse {
-
+public class UserUpdateResponse extends AbstractResponse {
 
 
 }
