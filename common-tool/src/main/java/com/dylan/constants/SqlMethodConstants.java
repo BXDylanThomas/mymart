@@ -14,6 +14,6 @@ public class SqlMethodConstants {
     public static final String INSERTTABLE = "insertTable";
     public static final String DELETETABLE = "deleteTable";
     public static final String UPDATETABLE = "updateTable";
-    public static final String SELECTTABLE = "updateTable";
+    public static final String SELECTTABLE = "selectTable";
 
 }

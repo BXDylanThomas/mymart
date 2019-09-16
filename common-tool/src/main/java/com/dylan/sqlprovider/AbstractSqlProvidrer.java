@@ -11,18 +11,14 @@ import java.util.Map;
  * @Author : dylan
  * @Date :create in 2019/9/5 21:40
  */
-public abstract class AbstractSqlProvidrer {
-
-    protected String tableName;
-    protected Class entryClass;
-    protected Map<String,String> map;
+public interface AbstractSqlProvidrer {
 
 
-    public abstract String insertTable(AbstractRequest abstractRequest);
+   String insertTable(AbstractRequest abstractRequest);
 
-    public abstract String deleteTable(AbstractRequest abstractRequest);
+   String deleteTable(AbstractRequest abstractRequest);
 
-    public abstract String updateTable(AbstractRequest abstractRequest,Map<String,String> keyMap);
+    String updateTable(AbstractRequest abstractRequest);
 
-    public abstract String selectTable(AbstractRequest abstractRequest);
+    String selectTable(AbstractRequest abstractRequest);
 }
