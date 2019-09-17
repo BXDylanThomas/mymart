@@ -10,12 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dylan.commons</groupId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>../mart-service</module>
-    </modules>
 
     <artifactId>mycommon-tool</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>mycommon-tool</name>
     <dependencies>

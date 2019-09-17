@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @Date :create in 2019/9/10 17:26
  */
 @Data
-@ConfigurationProperties(prefix = "spring.redission",ignoreInvalidFields = false)
+@ConfigurationProperties(prefix = "spring.redisson",ignoreInvalidFields = false)
 public class RedissonProperties {
 
 	private String address; //连接地址

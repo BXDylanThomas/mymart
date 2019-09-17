@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
-  com.dylan.config.redisconfig,\
+  com.dylan.config.redisconfig.RedissonAutoConfiguration
