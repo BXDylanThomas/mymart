@@ -62,6 +62,14 @@ public class UtilsSqlProvider {
         return result;
     }
 
+    /**
+     * 删除
+     *
+     * @param tableName
+     * @param request
+     * @param map
+     * @return
+     */
     public static String getDeleteSql(String tableName,Object request,Map<String,String> map){
         String result = new SQL(){
             {
@@ -85,6 +93,7 @@ public class UtilsSqlProvider {
     }
 
     /**
+     * 更新
      *
      * @param tableName 表名
      * @param request 参数
@@ -118,6 +127,7 @@ public class UtilsSqlProvider {
     }
 
     /**
+     * 查询
      *
      * @param tableName  表名
      * @param request 参数

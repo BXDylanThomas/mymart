@@ -1,6 +1,5 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +11,6 @@ import java.util.List;
  * @Date :create in 2019/9/4 15:00
  */
 @Data
-public class AddressQueryResponse extends AbstractResponse {
+public class AddressQueryResponse extends UserAbstractResponse {
     private List<AddressDto> addressDtoList;
 }

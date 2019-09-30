@@ -32,7 +32,7 @@ public abstract class AbstractResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "AbstractResponse{" +
+        return "Response{" +
                 "code='" + code + '\'' +
                 ", msg='" + msg + '\'' +
                 '}';

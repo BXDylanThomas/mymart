@@ -1,6 +1,5 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @Date :create in 2019/9/4 15:00
  */
 @Data
-public class LoginResponse extends AbstractResponse {
+public class LoginResponse extends UserAbstractResponse {
     private Integer userId;
     private String userName;
     private String password;

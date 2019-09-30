@@ -1,9 +1,5 @@
 package com.dylan.constants;
 
-import org.apache.ibatis.annotations.Delete;
-
-import java.sql.SQLClientInfoException;
-
 /**
  * code is far away from bug with the animal protecting
  *

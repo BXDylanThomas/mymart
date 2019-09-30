@@ -1,16 +1,19 @@
 package com.dylan.martprovider.service;
 
+import com.alibaba.fastjson.JSON;
 import com.dylan.GoodsService;
-import com.dylan.constants.GoodsCodeConstants;
+import com.dylan.constants.MartCodeConstants;
 import com.dylan.dto.*;
+import com.dylan.martprovider.constants.GlobalConstants;
 import com.dylan.martprovider.converter.GoodsConverter;
 import com.dylan.martprovider.dal.dao.GoodsDao;
 import com.dylan.martprovider.dal.entity.Goods;
-import com.dylan.martprovider.utils.ExceptionProcessUtil;
+import com.dylan.martprovider.service.cashmanager.CashManager;
 import com.dylan.martprovider.utils.ResponseUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,25 +32,64 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsDao goodsDao;
     @Autowired
     private GoodsConverter goodsConverter;
+    @Autowired
+	private CashManager cashManager;
 
-    @Override
+	/**
+	 * 查询的单个商品
+	 * 并放入redis缓存，过期时间1天
+	 */
+	@Override
     public GoodsQueryResponse goodsQuery(GoodsQueryRequest goodsQueryRequest) {
         GoodsQueryResponse goodsQueryResponse = new GoodsQueryResponse();
         try{
-        	if (goodsQueryRequest.getPage() !=null &&goodsQueryRequest.getPage() >=0 && goodsQueryRequest.getPageSize()>0){
-				PageHelper.startPage(goodsQueryRequest.getPage(),goodsQueryRequest.getPageSize());
+			String json = cashManager.checkCash(generatorCartItemKey(goodsQueryRequest.getId()));
+			if (StringUtils.isNotBlank(json)){
+				GoodsDto goodsDto = JSON.parseObject(json,GoodsDto.class);
+				goodsQueryResponse.setGoodsDto(goodsDto);
+				goodsQueryResponse = (GoodsQueryResponse) ResponseUtils.getResponse(goodsDto,goodsQueryResponse, MartCodeConstants.SUCCESS, MartCodeConstants.SYSTEM_ERROR);
+				return goodsQueryResponse;
 			}
-            List<Goods> goodsList = goodsDao.goodsQueryList(goodsQueryRequest);
-            List<GoodsDto> goodsDtos = goodsConverter.goodsDto(goodsList);
-            goodsQueryResponse.setGoodsDtoList(goodsDtos);
-            PageInfo<GoodsDto> pageInfo = new PageInfo<>(goodsDtos);
-            goodsQueryResponse.setTotal(pageInfo.getTotal());
-			goodsQueryResponse = (GoodsQueryResponse) ResponseUtils.getResponse(goodsList,goodsQueryResponse, GoodsCodeConstants.SUCCESS,GoodsCodeConstants.SYSTEM_ERROR);
+            Goods goodsList = goodsDao.goodsQueryList(goodsQueryRequest);
+            GoodsDto goodsDtos = goodsConverter.goodsDto(goodsList);
+            goodsQueryResponse.setGoodsDto(goodsDtos);
+			//设置缓存
+			cashManager.setCash(generatorCartItemKey(goodsQueryRequest.getId()),JSON.toJSON(goodsDtos).toString(),GlobalConstants.ITEM_EXPIRE);
+			goodsQueryResponse = (GoodsQueryResponse) ResponseUtils.getResponse(goodsList,goodsQueryResponse, MartCodeConstants.SUCCESS, MartCodeConstants.SYSTEM_ERROR);
         }catch (Exception e ){
             log.error("userLoginServiceImpl.select occur exception -> "+e);
             ExceptionProcessUtil.exceptionProcessHandle(goodsQueryResponse,e);
         }
 		return goodsQueryResponse;
     }
+
+	/**
+	 * 查询所有商品
+	 */
+	@Override
+	public GoodsAllQueryResponse goodsAllQuery(GoodsAllQueryRequest goodsAllQueryRequest) {
+		GoodsAllQueryResponse goodsAllQueryResponse = new GoodsAllQueryResponse();
+		try{
+			if (goodsAllQueryRequest.getPage() !=null &&goodsAllQueryRequest.getPage() >=0 && goodsAllQueryRequest.getPageSize()>0){
+				PageHelper.startPage(goodsAllQueryRequest.getPage(),goodsAllQueryRequest.getPageSize());
+			}
+			List<Goods> goodsList = goodsDao.goodsAllQueryList(goodsAllQueryRequest);
+			List<GoodsDto> goodsDtos = goodsConverter.goodsDto(goodsList);
+			goodsAllQueryResponse.setGoodsDtoList(goodsDtos);
+			PageInfo<GoodsDto> pageInfo = new PageInfo<>(goodsDtos);
+			goodsAllQueryResponse.setTotal(pageInfo.getTotal());
+			goodsAllQueryResponse = (GoodsAllQueryResponse) ResponseUtils.getResponse(goodsList,goodsAllQueryResponse, MartCodeConstants.SUCCESS, MartCodeConstants.SYSTEM_ERROR);
+		}catch (Exception e ){
+			log.error("userLoginServiceImpl.select occur exception -> "+e);
+			ExceptionProcessUtil.exceptionProcessHandle(goodsAllQueryResponse,e);
+		}
+		return goodsAllQueryResponse;
+	}
+
+	private String generatorCartItemKey(Integer goodId){
+		StringBuilder sb = new StringBuilder(GlobalConstants.GOODS_CACHE_PREFIX);
+		sb.append(":").append(goodId);
+		return sb.toString();
+	}
 
 }

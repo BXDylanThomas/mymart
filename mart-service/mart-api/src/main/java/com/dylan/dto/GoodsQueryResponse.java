@@ -1,10 +1,6 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * code is far away from bug with the animal protecting
@@ -13,9 +9,9 @@ import java.util.List;
  * @Date :create in 2019/9/9 10:42
  */
 @Data
-public class GoodsQueryResponse extends AbstractResponse {
+public class GoodsQueryResponse extends MartAbstractResponse {
 
-    private List<GoodsDto> goodsDtoList;
+    private GoodsDto goodsDto;
 
     private long total;
 }

@@ -8,4 +8,6 @@ public interface GoodsService {
 
 	GoodsQueryResponse goodsQuery(GoodsQueryRequest goodsQueryRequest);
 
+	GoodsAllQueryResponse goodsAllQuery(GoodsAllQueryRequest goodsAllQueryRequest);
+
 }

@@ -1,6 +1,5 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  * @Date :create in 2019/9/10 17:00
  */
 @Data
-public class CartQueryResponse extends AbstractResponse {
+public class CartQueryResponse extends MartAbstractResponse {
 
 	private List<CartDto> cartDtoList;
 

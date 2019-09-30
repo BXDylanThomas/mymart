@@ -2,12 +2,12 @@ package com.dylan.userprovidersss.dal.dao;
 
 import com.dylan.Result.AbstractRequest;
 import com.dylan.constants.SqlMethodConstants;
-import com.dylan.dto.LoginRequest;
-import com.dylan.dto.RegisterRequest;
-import com.dylan.dto.UserUpdateRequest;
 import com.dylan.userprovidersss.dal.daoprovider.UserSqlProvider;
 import com.dylan.userprovidersss.dal.model.User;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.stereotype.Repository;
 
 /**

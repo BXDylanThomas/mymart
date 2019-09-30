@@ -1,10 +1,9 @@
 package com.dylan.dto;
 
-import com.dylan.Exception.ValidException;
 import com.dylan.Result.AbstractRequest;
-import com.dylan.constants.UserCodeConstants;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * code is far away from bug with the animal protecting
@@ -15,15 +14,11 @@ import org.apache.commons.lang3.StringUtils;
 @Data
 public class LoginRequest extends AbstractRequest {
 
+
+    @NotNull(message = "用户名不能为空")
     private String userName;
+    @NotNull(message = "密码不能为空")
     private String password;
 
 
-    @Override
-    public void requestCheck() {
-        //校验参数不能为空
-        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)) {
-            throw new ValidException(UserCodeConstants.REQUEST_DATA_FAILUE.getCode(), UserCodeConstants.REQUEST_DATA_FAILUE.getMessage());
-        }
-    }
 }

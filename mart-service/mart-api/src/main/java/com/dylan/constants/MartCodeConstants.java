@@ -6,7 +6,7 @@ package com.dylan.constants;
  * @Author : dylan
  * @Date :create in 2019/9/4 11:11
  */
-public enum GoodsCodeConstants {
+public enum MartCodeConstants {
 
     SUCCESS("000000", "成功"),
     REQUEST_DATA_FAILUE("000360", "请求参数校验失败"),
@@ -17,7 +17,7 @@ public enum GoodsCodeConstants {
     private String code;
     private String message;
 
-    GoodsCodeConstants(String code, String message) {
+    MartCodeConstants(String code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -42,7 +42,7 @@ public enum GoodsCodeConstants {
         if (code == null) {
             return null;
         }
-        for (GoodsCodeConstants value : GoodsCodeConstants.values()) {
+        for (MartCodeConstants value : MartCodeConstants.values()) {
             if (value.code.equals(code)) {
                 return value.message;
             }

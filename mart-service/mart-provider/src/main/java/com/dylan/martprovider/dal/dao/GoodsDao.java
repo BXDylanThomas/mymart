@@ -20,6 +20,9 @@ import java.util.List;
 public interface GoodsDao {
 
     @SelectProvider(type = GoodsSqlProvider.class,method = SqlMethodConstants.SELECTTABLE)
-    List<Goods> goodsQueryList(AbstractRequest abstractRequest);
+    Goods goodsQueryList(AbstractRequest abstractRequest);
+
+    @SelectProvider(type = GoodsSqlProvider.class,method = SqlMethodConstants.SELECTTABLE)
+    List<Goods> goodsAllQueryList(AbstractRequest abstractRequest);
 
 }

@@ -1,8 +1,10 @@
 package com.dylan.userprovidersss;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dylan.UserLoginService;
 import com.dylan.dto.LoginRequest;
 import com.dylan.dto.LoginResponse;
+import com.dylan.dto.UserAbstractResponse;
 import com.dylan.userprovidersss.bootstrap.UserProvidersssApplication;
 import com.dylan.userprovidersss.dal.dao.UserDao;
 import org.junit.Test;
@@ -22,9 +24,15 @@ public class UserProvidersssApplicationTests {
     public void contextLoads() {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUserName("1");
-        loginRequest.setPassword("1");
-        LoginResponse login = userLoginService.login(loginRequest);
-        System.out.println(login.toString());
+//        loginRequest.setPassword("1");
+        UserAbstractResponse login = userLoginService.login(loginRequest);
+        String s = JSONObject.toJSONString(login);
+        System.out.println(s);
+        System.out.println("结果"+login.toString());
     }
 
+    @Test
+    public void test2(){
+
+    }
 }

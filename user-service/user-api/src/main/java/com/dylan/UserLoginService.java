@@ -1,13 +1,10 @@
 package com.dylan;
 
-import com.dylan.dto.LoginRequest;
-import com.dylan.dto.LoginResponse;
-import com.dylan.dto.UserUpdateRequest;
-import com.dylan.dto.UserUpdateResponse;
+import com.dylan.dto.*;
 
 public interface UserLoginService {
 
-    LoginResponse login(LoginRequest loginRequest);
+    UserAbstractResponse login(LoginRequest loginRequest);
 
-    UserUpdateResponse update(UserUpdateRequest userUpdateRequest);
+    UserAbstractResponse update(UserUpdateRequest userUpdateRequest);
 }

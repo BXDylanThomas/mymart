@@ -42,9 +42,8 @@ public class MartProviderApplicationTests {
     @Test
     public void getGoods(){
         GoodsQueryRequest goodsQueryRequest = new GoodsQueryRequest();
+        goodsQueryRequest.setId(1);
         GoodsQueryResponse goodsQueryResponse = goodsService.goodsQuery(goodsQueryRequest);
-        goodsQueryResponse.getGoodsDtoList().forEach(obj ->{
-            System.out.println(obj.toString());
-        });
+        System.out.println(goodsQueryResponse.getGoodsDto().toString());
     }
 }

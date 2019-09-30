@@ -3,6 +3,7 @@ package com.dylan.userprovidersss.utils;
 import com.dylan.Result.AbstractResponse;
 import com.dylan.constants.UserCodeConstants;
 import com.dylan.dto.AddressAddResponse;
+import com.dylan.utils.UtilsResponse;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @Author : dylan
  * @Date :create in 2019/9/6 16:35
  */
-public class ResponseUtils {
+public class ResponseUtils  {
 
     public static AbstractResponse getResponse(Object object, AbstractResponse abstractResponse,UserCodeConstants successConstants,UserCodeConstants failConstants){
         if (object instanceof Integer){
@@ -26,7 +27,6 @@ public class ResponseUtils {
         }
         return abstractResponse;
     }
-
 
     private static AbstractResponse parse(int result, AbstractResponse abstractResponse,UserCodeConstants successConstants,UserCodeConstants failConstants){
 		return result > 0 ? ResponseUtils.setValue(abstractResponse,successConstants):ResponseUtils.setValue(abstractResponse,failConstants);

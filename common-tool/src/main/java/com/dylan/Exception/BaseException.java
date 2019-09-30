@@ -1,8 +1,5 @@
 package com.dylan.Exception;
 
-import lombok.Builder;
-import lombok.Data;
-
 /**
  * code is far away from bug with the animal protecting
  *
@@ -43,15 +40,17 @@ public class BaseException  extends RuntimeException{
         return errCode;
     }
 
-    public void setErrCode(String errCode) {
+    public BaseException setErrCode(String errCode) {
         this.errCode = errCode;
+        return this;
     }
 
     public String getErrMessage() {
         return errMessage;
     }
 
-    public void setErrMessage(String errMessage) {
+    public BaseException setErrMessage(String errMessage) {
         this.errMessage = errMessage;
+        return this;
     }
 }

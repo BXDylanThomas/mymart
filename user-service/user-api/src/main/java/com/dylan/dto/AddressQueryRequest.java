@@ -1,10 +1,9 @@
 package com.dylan.dto;
 
-import com.dylan.Exception.ValidException;
 import com.dylan.Result.AbstractRequest;
-import com.dylan.constants.UserCodeConstants;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.constraints.Min;
 
 /**
  * code is far away from bug with the animal protecting
@@ -15,13 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 @Data
 public class AddressQueryRequest extends AbstractRequest {
 
+    @Min(value = 1,message = "用户id最小为1")
     private Integer userId;
 
-    @Override
-    public void requestCheck() {
-        //校验参数不能为空
-        if (userId ==null || userId == 0 ) {
-            throw new ValidException(UserCodeConstants.REQUEST_DATA_FAILUE.getCode(), UserCodeConstants.REQUEST_DATA_FAILUE.getMessage());
-        }
-    }
 }

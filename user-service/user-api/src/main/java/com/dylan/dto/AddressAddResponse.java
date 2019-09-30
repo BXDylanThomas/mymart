@@ -1,6 +1,5 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @Date :create in 2019/9/4 15:00
  */
 @Data
-public class AddressAddResponse extends AbstractResponse {
+public class AddressAddResponse extends UserAbstractResponse {
 
 
     @Override

@@ -2,12 +2,11 @@ package com.dylan.martprovider.service;
 
 import com.alibaba.fastjson.JSON;
 import com.dylan.CartService;
-import com.dylan.constants.GoodsCodeConstants;
+import com.dylan.constants.MartCodeConstants;
 import com.dylan.dto.*;
 import com.dylan.martprovider.constants.GlobalConstants;
 import com.dylan.martprovider.dal.dao.GoodsDao;
 import com.dylan.martprovider.dal.entity.Goods;
-import com.dylan.martprovider.utils.ExceptionProcessUtil;
 import com.dylan.martprovider.utils.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
@@ -42,7 +41,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public CartAddResponse cartAdd(CartAddRequest cartAddRequest) {
 		CartAddResponse cartAddResponse = new CartAddResponse();
-		ResponseUtils.setValue(cartAddResponse,GoodsCodeConstants.SUCCESS);
+		ResponseUtils.setValue(cartAddResponse, MartCodeConstants.SUCCESS);
 		try {
 			cartAddRequest.requestCheck();
 			String userItemKey = generatorCartItemKey(cartAddRequest.getUserId());
@@ -55,8 +54,8 @@ public class CartServiceImpl implements CartService {
 			}else{
 				GoodsQueryRequest goodsQueryRequest = new GoodsQueryRequest();
 				goodsQueryRequest.setId(cartAddRequest.getGoodsId());
-				List<Goods> goodsList = goodsDao.goodsQueryList(goodsQueryRequest);
-				if (goodsList != null && goodsList.size() > 0){
+				Goods goodsList = goodsDao.goodsQueryList(goodsQueryRequest);
+				if (goodsList != null ){
 					CartDto cartDto = new CartDto();
 					cartDto.setUserId(cartAddRequest.getUserId());
 					cartDto.setGoodsId(cartAddRequest.getGoodsId());
@@ -78,7 +77,7 @@ public class CartServiceImpl implements CartService {
 	public CartQueryResponse cartQuery(CartQueryRequest cartQueryRequest) {
 		CartQueryResponse cartQueryResponse = new CartQueryResponse();
 		List<CartDto> cartDtoList = new ArrayList<>();
-		ResponseUtils.setValue(cartQueryResponse,GoodsCodeConstants.SUCCESS);
+		ResponseUtils.setValue(cartQueryResponse, MartCodeConstants.SUCCESS);
 		try{
 			cartQueryRequest.requestCheck();
 			String userItemKey = generatorCartItemKey(cartQueryRequest.getUserId());
@@ -104,7 +103,7 @@ public class CartServiceImpl implements CartService {
 		try{
 			RMap<Object, Object> map = redissonClient.getMap(generatorCartItemKey(cartDeleteRequest.getUserId()));
 			map.remove(cartDeleteRequest.getGoodsId());
-			ResponseUtils.setValue(cartDeleteResponse,GoodsCodeConstants.SUCCESS);
+			ResponseUtils.setValue(cartDeleteResponse, MartCodeConstants.SUCCESS);
 		}catch (Exception e){
 			log.error("CartServiceImpl cartDelete occur exception,this is detail -> "+e);
 			ExceptionProcessUtil.exceptionProcessHandle(cartDeleteResponse,e);
@@ -124,7 +123,7 @@ public class CartServiceImpl implements CartService {
 				CartDto cartDto = (CartDto) obj;
 				map.remove(cartDto.getGoodsId());
 			});
-			ResponseUtils.setValue(cartClearResponse,GoodsCodeConstants.SUCCESS);
+			ResponseUtils.setValue(cartClearResponse, MartCodeConstants.SUCCESS);
 		}catch (Exception e){
 			log.error("CartServiceImpl cartClearAll occur exception,this is detail -> "+e);
 			ExceptionProcessUtil.exceptionProcessHandle(cartClearResponse,e);
@@ -146,7 +145,7 @@ public class CartServiceImpl implements CartService {
 				cartDto.setGoodsNum(cartUpdateRequest.getGoodsNum());
 				map.put(cartUpdateRequest.getUserId(),JSON.toJSON(cartDto));
 			}
-			ResponseUtils.setValue(cartUpdateResponse,GoodsCodeConstants.SUCCESS);
+			ResponseUtils.setValue(cartUpdateResponse, MartCodeConstants.SUCCESS);
 		}catch (Exception e){
 			log.error("CartServiceImpl cartUpdate occur exception,this is detail -> "+e);
 			ExceptionProcessUtil.exceptionProcessHandle(cartUpdateResponse,e);

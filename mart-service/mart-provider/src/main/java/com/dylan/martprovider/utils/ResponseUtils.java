@@ -1,7 +1,7 @@
 package com.dylan.martprovider.utils;
 
 import com.dylan.Result.AbstractResponse;
-import com.dylan.constants.GoodsCodeConstants;
+import com.dylan.constants.MartCodeConstants;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ResponseUtils {
 
-    public static AbstractResponse getResponse(Object object, AbstractResponse abstractResponse, GoodsCodeConstants successConstants, GoodsCodeConstants failConstants){
+    public static AbstractResponse getResponse(Object object, AbstractResponse abstractResponse, MartCodeConstants successConstants, MartCodeConstants failConstants){
         if (object instanceof Integer){
             int i = Integer.parseInt(object.toString());
             abstractResponse = parse(i,abstractResponse,successConstants,failConstants);
@@ -27,19 +27,19 @@ public class ResponseUtils {
     }
 
 
-    private static AbstractResponse parse(int result, AbstractResponse abstractResponse,GoodsCodeConstants successConstants,GoodsCodeConstants failConstants){
+    private static AbstractResponse parse(int result, AbstractResponse abstractResponse, MartCodeConstants successConstants, MartCodeConstants failConstants){
 		return result > 0 ? ResponseUtils.setValue(abstractResponse,successConstants):ResponseUtils.setValue(abstractResponse,failConstants);
     }
 
-    private static AbstractResponse parse(List result, AbstractResponse abstractResponse,GoodsCodeConstants successConstants,GoodsCodeConstants failConstants){
+    private static AbstractResponse parse(List result, AbstractResponse abstractResponse, MartCodeConstants successConstants, MartCodeConstants failConstants){
 		return result == null ||result.size() ==0 ? ResponseUtils.setValue(abstractResponse,failConstants):ResponseUtils.setValue(abstractResponse,successConstants);
     }
 
-    private static AbstractResponse parse(Object result, AbstractResponse abstractResponse,GoodsCodeConstants successConstants,GoodsCodeConstants failConstants){
+    private static AbstractResponse parse(Object result, AbstractResponse abstractResponse, MartCodeConstants successConstants, MartCodeConstants failConstants){
         return result == null?ResponseUtils.setValue(abstractResponse,failConstants):ResponseUtils.setValue(abstractResponse,successConstants);
     }
 
-    public static AbstractResponse setValue(AbstractResponse abstractResponse,GoodsCodeConstants goodsCodeConstants){
+    public static AbstractResponse setValue(AbstractResponse abstractResponse, MartCodeConstants goodsCodeConstants){
 		abstractResponse.setCode(goodsCodeConstants.getCode());
 		abstractResponse.setMsg(goodsCodeConstants.getMessage());
 		return abstractResponse;

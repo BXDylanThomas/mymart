@@ -35,6 +35,7 @@ public class RedissonAutoConfiguration {
                 .setAddress(node)
                 .setTimeout(redissonProperties.getTimeout())
                 .setConnectionMinimumIdleSize(redissonProperties.getPool().getMinIdle());
+        config.setCodec(new org.redisson.client.codec.StringCodec());//设置编码
         if (StringUtils.isNotBlank(redissonProperties.getPassword())) {
             serverConfig.setPassword(redissonProperties.getPassword());
         }

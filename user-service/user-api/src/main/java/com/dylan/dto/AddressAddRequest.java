@@ -1,9 +1,10 @@
 package com.dylan.dto;
 
-import com.dylan.Exception.ValidException;
 import com.dylan.Result.AbstractRequest;
-import com.dylan.constants.UserCodeConstants;
-import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * code is far away from bug with the animal protecting
@@ -14,18 +15,15 @@ import org.apache.commons.lang3.StringUtils;
 public class AddressAddRequest extends AbstractRequest {
 
     private Integer userId;
+    @NotNull(message = "用户名不能为空")
     private String userName;
+    @Pattern(regexp = "^1(3|4|5|6|7|8|9)\\d{9}$",message = "手机号码无效")
     private String phone;
+    @NotNull(message = "必须填写地址")
     private String addressDetail;
     private Integer isDefault;
     private String makeTime;
     private String modifyTime;
 
-    @Override
-    public void requestCheck() {
-        //校验参数不能为空
-        if (userId ==null || userId == 0  || StringUtils.isBlank(userName) || StringUtils.isBlank(phone) || StringUtils.isBlank(addressDetail) ) {
-            throw new ValidException(UserCodeConstants.REQUEST_DATA_FAILUE.getCode(), UserCodeConstants.REQUEST_DATA_FAILUE.getMessage());
-        }
-    }
+
 }

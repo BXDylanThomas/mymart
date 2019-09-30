@@ -4,11 +4,11 @@ import com.dylan.dto.*;
 
 public interface AddressService {
 
-    AddressQueryResponse addressQuery(AddressQueryRequest addressQueryRequest);
+    UserAbstractResponse addressQuery(AddressQueryRequest addressQueryRequest);
 
-    AddressAddResponse addressAdd(AddressAddRequest addressAddRequest);
+    UserAbstractResponse addressAdd(AddressAddRequest addressAddRequest);
 
-    AddressDeleteResponse addressDeleteByUserId(AddressDeleteRequest addressDeleteRequest);
+    UserAbstractResponse addressDeleteByUserId(AddressDeleteRequest addressDeleteRequest);
 
-    AddressUpdateResponse addressUpdate(AddressUpdateRequest addressUpdateRequest);
+    UserAbstractResponse addressUpdate(AddressUpdateRequest addressUpdateRequest);
 }

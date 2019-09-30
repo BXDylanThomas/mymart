@@ -1,7 +1,5 @@
 package com.dylan.Exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 /**

@@ -17,13 +17,12 @@ public class ExceptionUtils  {
         }
 
         if (e instanceof ValidException){
-            response.setCode(((ValidException)e).getErrCode());
             response.setCode(((ValidException)e).getMessage());
-        }if (e instanceof ProcessException){
-            response.setCode(((ProcessException)e).getErrCode());
+            response.setMsg(((ValidException)e).getErrCode());
+        }else if (e instanceof ProcessException){
             response.setCode(((ProcessException)e).getMessage());
+            response.setMsg(((ProcessException)e).getErrCode());
         }
-
         else {
             throw e;
         }

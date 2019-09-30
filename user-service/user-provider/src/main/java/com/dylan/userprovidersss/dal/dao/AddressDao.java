@@ -2,10 +2,6 @@ package com.dylan.userprovidersss.dal.dao;
 
 import com.dylan.Result.AbstractRequest;
 import com.dylan.constants.SqlMethodConstants;
-import com.dylan.dto.AddressAddRequest;
-import com.dylan.dto.AddressDeleteRequest;
-import com.dylan.dto.AddressQueryRequest;
-import com.dylan.dto.AddressUpdateRequest;
 import com.dylan.userprovidersss.dal.daoprovider.AddressSqlProvider;
 import com.dylan.userprovidersss.dal.model.Address;
 import org.apache.ibatis.annotations.DeleteProvider;

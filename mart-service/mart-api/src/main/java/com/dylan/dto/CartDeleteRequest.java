@@ -1,9 +1,9 @@
 package com.dylan.dto;
 
-import com.dylan.Exception.ValidException;
 import com.dylan.Result.AbstractRequest;
-import com.dylan.constants.GoodsCodeConstants;
 import lombok.Data;
+
+import javax.validation.constraints.Min;
 
 /**
  * code is far away from bug with the animal protecting
@@ -13,13 +13,9 @@ import lombok.Data;
  */
 @Data
 public class CartDeleteRequest extends AbstractRequest {
+	@Min(value = 1 ,message = "用户id最小为1")
 	private Integer userId;
+	@Min(value = 1 ,message = "商品id最小为1")
 	private Integer goodsId;
 
-	@Override
-	public void requestCheck() {
-		if (userId<=0 || goodsId<=0){
-			throw new ValidException(GoodsCodeConstants.REQUEST_DATA_FAILUE.getCode(),GoodsCodeConstants.REQUEST_DATA_FAILUE.getMessage());
-		}
-	}
 }

@@ -1,6 +1,5 @@
 package com.dylan.dto;
 
-import com.dylan.Result.AbstractResponse;
 import lombok.Data;
 
 /**
@@ -10,5 +9,9 @@ import lombok.Data;
  * @Date :create in 2019/9/10 18:03
  */
 @Data
-public class CartDeleteResponse  extends AbstractResponse {
+public class CartDeleteResponse  extends MartAbstractResponse {
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }
